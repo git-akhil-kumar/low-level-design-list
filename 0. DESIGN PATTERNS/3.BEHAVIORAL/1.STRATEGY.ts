@@ -1,3 +1,9 @@
+// Definition :- The Strategy pattern is a behavioral design pattern that 
+// lets you define a family of algorithms, put each of them into separate classes, 
+// and make their objects interchangeable. 
+// In other words, it's a way to change the behavior of an object at 
+// runtime without changing its implementation.
+
 interface ProductDetails {
 	productId: number;
 	price: number;
@@ -88,3 +94,51 @@ cart.setStrategy(new CreditCardStrategy());
 cart.addToCart(products);
 cart.addToCart(products);
 cart.checkout();
+
+// EXAMPLE TWO
+
+// This is the context class for the strategy
+class ImageProcessor {
+	private strategy: FilterStrategy;
+
+	constructor(strategy: FilterStrategy) {
+		this.strategy = strategy;
+	}
+
+	public setFilterStrategy(strategy: FilterStrategy): void {
+		this.strategy = strategy;
+	}
+
+	public applyFilter(image: string) {
+		this.strategy.apply(image);
+	}
+}
+
+interface FilterStrategy {
+	apply(image: string): void;
+}
+
+class SepiaStrategy implements FilterStrategy {
+	apply(image: string): void {
+		console.log(`Applying SepiaStrategy to ${image}`);
+	}
+}
+
+class GrayScaleStrategy implements FilterStrategy {
+	apply(image: string): void {
+		console.log(`Applying Gray Scale Strategy to ${image}`);
+	}
+}
+
+class NegativeStrategy implements FilterStrategy {
+	apply(image: string): void {
+		console.log(`Applying Negative Strategy to ${image}`);
+	}
+}
+
+// Client code
+const imageProcessor = new ImageProcessor(new GrayScaleStrategy());
+imageProcessor.applyFilter("Image1.jpg");
+
+imageProcessor.setFilterStrategy(new NegativeStrategy());
+imageProcessor.applyFilter("Image2.png");
