@@ -1,8 +1,8 @@
-// definition :- The Template Method is a behavioral design pattern 
+// definition :- The Template Method is a behavioral design pattern
 // that defines the skeleton of an algorithm in a base class
-// but lets subclasses override specific steps of the algorithm 
-// without changing its structure. 
-// This pattern allows you to make parts of an algorithm 
+// but lets subclasses override specific steps of the algorithm
+// without changing its structure.
+// This pattern allows you to make parts of an algorithm
 // optional, mandatory, or customizable by the subclasses.
 
 abstract class CakeRecipe {
@@ -55,6 +55,7 @@ class ChocolateCake extends CakeRecipe {
 	}
 }
 
+// Client code
 function CakeBackery(cakeRecipe: CakeRecipe) {
 	cakeRecipe.bakeCake();
 }

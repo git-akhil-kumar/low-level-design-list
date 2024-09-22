@@ -4,14 +4,14 @@ class ThreadSafeSingleton {
 
 	private constructor() {}
 
-	public static async getInstanceWithOutLocks() {
+	public static async getInstanceWithoutLocks() {
 		if (!ThreadSafeSingleton.instance) {
 			ThreadSafeSingleton.instance = new ThreadSafeSingleton();
 		}
 		return ThreadSafeSingleton.instance;
 	}
 
-	public static async getInstance(): Promise<ThreadSafeSingleton> {
+	public static async getInstanceWithLocks(): Promise<ThreadSafeSingleton> {
 		while (this.lock) {
 			await new Promise((resolve) => setTimeout(resolve, 1));
 		}
@@ -42,15 +42,15 @@ async function Main() {
 		instance8,
 		instance9,
 	] = await Promise.all([
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
-		await ThreadSafeSingleton.getInstanceWithOutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
+		await ThreadSafeSingleton.getInstanceWithoutLocks(),
 	]);
 	const verdict =
 		instance1 === instance2 &&
@@ -78,15 +78,15 @@ async function ThreadSafeMain() {
 		instance8,
 		instance9,
 	] = await Promise.all([
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
-		await ThreadSafeSingleton.getInstance(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
+		await ThreadSafeSingleton.getInstanceWithLocks(),
 	]);
 	const verdict =
 		instance1 === instance2 &&

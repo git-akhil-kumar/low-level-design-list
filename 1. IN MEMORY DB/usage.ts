@@ -1,15 +1,9 @@
 import { InMemoryDatabase } from "./database";
 
-// Initialize the singleton instance of the database
 const dbManager = InMemoryDatabase.getInstance();
 
-// Create a new database
 dbManager.createDatabase("MyDatabase");
-
-// Create a new table with schema and indexing
 dbManager.createTable("MyDatabase", "Users", ["name", "age"], "name");
-
-// Get the table and perform operations
 const usersTable = dbManager.getTable("MyDatabase", "Users");
 
 if (usersTable) {
