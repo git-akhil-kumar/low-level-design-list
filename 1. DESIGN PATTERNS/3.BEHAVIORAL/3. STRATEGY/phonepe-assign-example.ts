@@ -52,7 +52,7 @@ class RabbitMQStrategy implements MessageStrategy {
     const connection = await this.rabbitMq.connect();
     const channel = await connection.createChannel();
     await channel.assertExchange(message.exchange, 'topic', { durable: false });
-    await channel.publish(message.exchange, message.queue, Buffer.from(JSON.stringify(message.message)));
+    channel.publish(message.exchange, message.queue, Buffer.from(JSON.stringify(message.message)));
     await connection.close();
   }
 }
