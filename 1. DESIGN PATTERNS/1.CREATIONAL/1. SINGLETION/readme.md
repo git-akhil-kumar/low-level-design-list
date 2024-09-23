@@ -143,7 +143,8 @@ If the Singleton does hold onto a large amount of data, it could potentially cau
 
 Here is a simple flowchart illustrating the basic operation of garbage collection and the potential memory management issue with singletons using Mermaid.
 
----------------
+
+![Uploading Screenshot 2024-09-23 at 6.51.13 PM.png…]()
 
 In this diagram:
 
