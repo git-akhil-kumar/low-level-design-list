@@ -30,7 +30,7 @@ class ThreadSafeSingleton {
 	}
 }
 
-async function Main() {
+async function ThreadUnsafeMain() {
 	const [
 		instance1,
 		instance2,
@@ -64,7 +64,7 @@ async function Main() {
 
 	console.log(verdict);
 }
-Main();
+ThreadUnsafeMain();
 
 async function ThreadSafeMain() {
 	const [
@@ -99,4 +99,4 @@ async function ThreadSafeMain() {
 
 	console.log(verdict);
 }
-// ThreadSafeMain();
+ThreadSafeMain();
